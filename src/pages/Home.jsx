@@ -18,6 +18,7 @@ export const Home = () => {
       setIsLoading(false)
     })
 
+    window.scrollTo(0, 0)
   }, [])
 
   const onClickAdd = () => {
@@ -25,7 +26,7 @@ export const Home = () => {
   }
 
   return(
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -43,6 +44,6 @@ export const Home = () => {
             )))
         } 
       </div>
-    </>
+    </div>
   )
 }
