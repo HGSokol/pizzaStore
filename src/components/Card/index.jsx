@@ -1,7 +1,15 @@
 import { useState } from 'react'
 
 export const Card = (props) => {
-    const {costCard, onClickAdd, count, price, sizes, imageUrl, title, types } = props
+    const {  
+        onClickAdd, 
+        count, 
+        price, 
+        sizes, 
+        imageUrl, 
+        title, 
+        types 
+    } = props
 
     const [active, setActive] = useState(0)
     const [activeSize, setActiveSize] = useState(0)
@@ -19,26 +27,22 @@ export const Card = (props) => {
         <div className="pizza-block__selector">
             <ul>
                 {
-                    arr.map((item,i) => {
-                    return(
+                    arr.map((item,i) => (
                         <li 
                         key={i} 
-                        className={active === i? 'active': ''}
+                        className={active === i ?  'active' : ''}
                         onClick={() => setActive(i)}>{item}</li>
-                    )
-                    })
+                    ))
                 }
             </ul>
             <ul>
                 {
-                    sizes.map((item,i) => {
-                    return(
+                    sizes.map((item,i) => (
                         <li 
                         key={i} 
-                        className={activeSize === i? 'active': ''}
+                        className={activeSize === i ? 'active' : ''}
                         onClick={ () => setActiveSize(i)}>{item}</li>
-                    )
-                    })
+                    ))
                 }
             </ul>
         </div> 
@@ -57,9 +61,7 @@ export const Card = (props) => {
                     fill="white"
                 />
                 </svg>
-                <span
-                    onClick={() => costCard(price)}
-                    >Добавить
+                <span>Добавить
                 </span>
                 <i>{count}</i>
             </button>

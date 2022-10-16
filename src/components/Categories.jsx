@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-
 export const Categories = () => {
   const [active, setActive] = useState(0)
 
@@ -10,8 +9,7 @@ export const Categories = () => {
       <div className="categories">
         <ul>
             {
-              categories.map((e,i) => {
-                return(
+              categories.map((e,i) => (
                   <li
                     key={i}
                     className={active === i ? 'active' : ''}
@@ -19,8 +17,7 @@ export const Categories = () => {
                     >
                       {e}
                   </li>
-                )
-              })
+              ))
             }
         </ul>
       </div>
