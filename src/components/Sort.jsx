@@ -2,19 +2,22 @@ import { useState, useContext } from 'react'
 import { sortContext } from '../pages/Home'
 
 export const Sort = () => {
+    const {setSort, sort} = useContext(sortContext)
+    const objSort = [
+      {name:'популярности (Возрастанию)', sortCategories:'rating'},
+      {name:'популярности (Убыванию)', sortCategories:'-rating'},
+      {name:'цене (Возрастанию)', sortCategories:'price'},
+      {name:'цене (Убыванию)', sortCategories:'-price'},
+      {name:'алфавиту (Возрастанию)', sortCategories:'title'},
+      {name:'алфавиту (Убыванию)', sortCategories:'-title'},
+    ]
 
-    const {setSort} = useContext(sortContext)
-    const arr = ['популярности', 'цене', 'алфавиту']
-    const arrApi = ['rating','price','title']
-    
-    const [selectSort, setSelectSort] = useState(arr[0])
     const [openPopup, setOpenPopup] = useState(false)
 
 
     const isSort = (i) => {
-        setSort(arrApi[i])
-        setSelectSort(arr[i])
-        setOpenPopup(false)
+      setSort(i)
+      setOpenPopup(false)
     }
 
     return(
@@ -35,27 +38,27 @@ export const Sort = () => {
                 </svg>
                 <b>Сортировка по:</b>
                 <span   
-                    onClick={() => setOpenPopup(prev => !prev)}>
-                    {selectSort}
+                  onClick={() => setOpenPopup(prev => !prev)}>
+                    {sort.name}
                 </span>
             </div>
             {openPopup && (
-                <div  
-                    className="sort__popup">
-                    <ul>
-                        {
-                            arr.map((e,i) => (
-                                <li 
-                                  key={i}
-                                  className={arr.indexOf(selectSort) === i ? 'active' : '' }
-                                  onClick={() => isSort(i)}
-                                >
-                                  {e}
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </div>
+              <div  
+                  className="sort__popup">
+                  <ul>
+                    {
+                      objSort.map((e,i) => (
+                        <li 
+                          key={i}
+                          className={sort.sortCategories === e.sortCategories ? 'active' : '' }
+                          onClick={() => isSort(e)}
+                        >
+                          {e.name}
+                        </li>
+                      ))
+                    }
+                  </ul>
+              </div>
             )}
         </div>
     )

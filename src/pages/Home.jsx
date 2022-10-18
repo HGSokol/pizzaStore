@@ -12,27 +12,29 @@ export const Home = () => {
   const [count, setCount] = useState(0)
   const [item, setItem] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [sort, setSort] = useState('')
+  const [sort, setSort] = useState({
+    name:'популярности (Возрастанию)',
+    sortCategories:'rating',
+  })
   const [category, setCategory] = useState(0)
 
   useEffect(() => {
-    fetch('https://634846130484786c6e965029.mockapi.io/items')
-    .then(res => res.json())
-    .then(res => {
-      setItem(res)
-      setIsLoading(false)
-    })
+    setIsLoading(true)
+
+    const sortBy = sort.sortCategories.replace('-','');
+    const categoryRequest = category === 0? '': `&category=${category}`
+    const order = sort.sortCategories.includes('-') ? 'asc' : 'desc'
+
+    fetch(
+      `https://634846130484786c6e965029.mockapi.io/items?sortBy=${sortBy}${categoryRequest}&order=${order}`
+    )
+      .then(res => res.json())
+      .then(res => {
+        setItem(res)
+        setIsLoading(false)
+      })
 
     window.scrollTo(0, 0)
-  }, [])
-
-  useEffect(() => {
-    fetch(`https://634846130484786c6e965029.mockapi.io/items?sortBy=${sort}${category === 0? '': `&category=${category}`}`)
-    .then(res => res.json())
-    .then(res => {
-      setItem(res)
-      setIsLoading(false)
-    })
   }, [sort, category])
 
   return(
