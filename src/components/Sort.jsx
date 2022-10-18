@@ -1,13 +1,19 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { sortContext } from '../pages/Home'
 
 export const Sort = () => {
-    const [selectSort, setSelectSort] = useState('популярности')
+
+    const {setSort} = useContext(sortContext)
+    const arr = ['популярности', 'цене', 'алфавиту']
+    const arrApi = ['rating','price','title']
+    
+    const [selectSort, setSelectSort] = useState(arr[0])
     const [openPopup, setOpenPopup] = useState(false)
 
-    const arr = ['популярности', 'цене', 'алфавиту']
 
-    const isSort = (e) => {
-        setSelectSort(e.target.innerHTML)
+    const isSort = (i) => {
+        setSort(arrApi[i])
+        setSelectSort(arr[i])
         setOpenPopup(false)
     }
 
@@ -40,11 +46,11 @@ export const Sort = () => {
                         {
                             arr.map((e,i) => (
                                 <li 
-                                    key={i}
-                                    className={selectSort === e ? 'active' : '' }
-                                    onClick={e => isSort(e)}
-                                    >
-                                    {e}
+                                  key={i}
+                                  className={arr.indexOf(selectSort) === i ? 'active' : '' }
+                                  onClick={() => isSort(i)}
+                                >
+                                  {e}
                                 </li>
                             ))
                         }
