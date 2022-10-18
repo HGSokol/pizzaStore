@@ -1,5 +1,6 @@
-import { useState, useEffect, createContext } from 'react'
+import { useState, useEffect, createContext, useContext } from 'react'
 
+import { inputContext } from '../App';
 import { Categories } from '../components/Categories'
 import { Sort } from '../components/Sort'
 import { Card } from '../components/Card';
@@ -9,6 +10,7 @@ export const sortContext = createContext()
 const {Provider} = sortContext
 
 export const Home = () => {
+  const {searchValue} = useContext(inputContext)
   const [count, setCount] = useState(0)
   const [item, setItem] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -55,7 +57,9 @@ export const Home = () => {
         <div className="content__items">
           {
             isLoading ? [...new Array(10)].map( (_, i) => <Skeleton key={i}/> ) :
-              (item.map(e => ( 
+              (item
+                  .filter(e => e.title.toLowerCase().includes(searchValue.toLowerCase()))
+                  .map(e => ( 
                   <Card key={e.id} {...e}/>
               )))
           } 
