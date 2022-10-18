@@ -5,6 +5,7 @@ import { Categories } from '../components/Categories'
 import { Sort } from '../components/Sort'
 import { Card } from '../components/Card';
 import { Skeleton } from '../components/Card/Skeleon';
+import { Pagination } from '../components/Pagination';
 
 export const sortContext = createContext()
 const {Provider} = sortContext
@@ -64,6 +65,7 @@ export const Home = () => {
               )))
           } 
         </div>
+        <Pagination />
       </div>
     </Provider>
   )
