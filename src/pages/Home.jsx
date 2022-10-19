@@ -20,6 +20,7 @@ export const Home = () => {
     sortCategories:'rating',
   })
   const [category, setCategory] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     setIsLoading(true)
@@ -29,7 +30,7 @@ export const Home = () => {
     const order = sort.sortCategories.includes('-') ? 'asc' : 'desc'
 
     fetch(
-      `https://634846130484786c6e965029.mockapi.io/items?sortBy=${sortBy}${categoryRequest}&order=${order}`
+      `https://634846130484786c6e965029.mockapi.io/items?page=${currentPage}&limit=4&sortBy=${sortBy}${categoryRequest}&order=${order}`
     )
       .then(res => res.json())
       .then(res => {
@@ -38,7 +39,7 @@ export const Home = () => {
       })
 
     window.scrollTo(0, 0)
-  }, [sort, category])
+  }, [sort, category, currentPage])
 
   return(
     <Provider value={{
@@ -48,6 +49,8 @@ export const Home = () => {
       category,
       setCount,
       count,
+      currentPage,
+      setCurrentPage
     }}>
       <div className="container">
         <div className="content__top">
@@ -57,7 +60,7 @@ export const Home = () => {
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
           {
-            isLoading ? [...new Array(10)].map( (_, i) => <Skeleton key={i}/> ) :
+            isLoading ? [...new Array(4)].map( (_, i) => <Skeleton key={i}/> ) :
               (item
                   .filter(e => e.title.toLowerCase().includes(searchValue.toLowerCase()))
                   .map(e => ( 

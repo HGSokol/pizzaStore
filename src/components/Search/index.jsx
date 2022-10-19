@@ -1,10 +1,10 @@
 import { useContext } from 'react'
-import { inputContext } from '../../App'
+import { inputContext } from '../../App' 
 import styles from './Search.module.scss'
 
 export const Search = () => {
   const {searchValue, setSearchValue} = useContext(inputContext)
-  
+
   return (
     <div className={styles.root}>
       <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 48 48" width="48">
