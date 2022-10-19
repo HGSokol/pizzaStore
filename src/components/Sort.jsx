@@ -1,8 +1,12 @@
-import { useState, useContext } from 'react'
-import { sortContext } from '../pages/Home'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { sortPizza } from '../redux/slices/pizzaSlice'
 
 export const Sort = () => {
-    const {setSort, sort} = useContext(sortContext)
+    const sort = useSelector(state => state.pizza.sort)
+    const dispatch = useDispatch()
+
     const objSort = [
       {name:'популярности (Возрастанию)', sortCategories:'rating'},
       {name:'популярности (Убыванию)', sortCategories:'-rating'},
@@ -16,7 +20,7 @@ export const Sort = () => {
 
 
     const isSort = (i) => {
-      setSort(i)
+      dispatch(sortPizza(i))
       setOpenPopup(false)
     }
 

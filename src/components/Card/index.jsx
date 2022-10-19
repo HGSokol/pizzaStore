@@ -1,11 +1,6 @@
-import { useState, useContext } from 'react'
-import { sortContext } from '../../pages/Home'
+import { useState } from 'react'
 
 export const Card = (props) => {
-  const {
-    setCount, 
-    count
-  } = useContext(sortContext)
   const {price, sizes, imageUrl, title, types} = props
 
   const [active, setActive] = useState(0)
@@ -46,7 +41,7 @@ export const Card = (props) => {
           </div> 
           <div className="pizza-block__bottom">
               <div className="pizza-block__price">{`от ${price} ₽`}</div>
-              <button onClick={() =>setCount(prev => prev + 1)} className="button button--outline button--add">
+              <button className="button button--outline button--add">
                   <svg
                   width={12}
                   height={12}
@@ -61,7 +56,7 @@ export const Card = (props) => {
                   </svg>
                   <span>Добавить
                   </span>
-                  <i>{count}</i>
+                  <i>0</i>
               </button>
           </div>
       </div>

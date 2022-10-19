@@ -1,8 +1,10 @@
-import { useContext } from 'react'
-import { sortContext } from '../pages/Home'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { changeCategory } from '../redux/slices/pizzaSlice'
 
 export const Categories = () => {
-  const {setCategory, category} = useContext(sortContext)
+  const category = useSelector(state => state.pizza.value)
+  const dispatch = useDispatch()
   
   const categories = ['Все','Мясные','Вегетарианские','Гриль','Острые','Закрытые']
 
@@ -14,7 +16,7 @@ export const Categories = () => {
             <li
               key={i}
               className={category === i ? 'active' : ''}
-              onClick={() => setCategory(i)}
+              onClick={() => dispatch(changeCategory(i))}
             >
               {e}
             </li>

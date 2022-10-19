@@ -1,32 +1,27 @@
-import { useState, useEffect, createContext, useContext } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-import { inputContext } from '../App';
 import { Categories } from '../components/Categories'
 import { Sort } from '../components/Sort'
 import { Card } from '../components/Card';
 import { Skeleton } from '../components/Card/Skeleon';
 import { Pagination } from '../components/Pagination';
 
-export const sortContext = createContext()
-const {Provider} = sortContext
 
 export const Home = () => {
-  const {searchValue} = useContext(inputContext)
-  const [count, setCount] = useState(0)
+  const filterPizza = useSelector(state => state.filter.value)
+  const changeCategory = useSelector(state => state.pizza.value)
+  const sort = useSelector(state => state.pizza.sort)
+  const currentPage = useSelector(state => state.pizza.currentPage)
+
   const [item, setItem] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [sort, setSort] = useState({
-    name:'популярности (Возрастанию)',
-    sortCategories:'rating',
-  })
-  const [category, setCategory] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     setIsLoading(true)
 
     const sortBy = sort.sortCategories.replace('-','');
-    const categoryRequest = category === 0? '': `&category=${category}`
+    const categoryRequest = changeCategory === 0? '': `&category=${changeCategory}`
     const order = sort.sortCategories.includes('-') ? 'asc' : 'desc'
 
     fetch(
@@ -39,19 +34,9 @@ export const Home = () => {
       })
 
     window.scrollTo(0, 0)
-  }, [sort, category, currentPage])
+  }, [sort, changeCategory, currentPage])
 
   return(
-    <Provider value={{
-      setSort,
-      sort,
-      setCategory,
-      category,
-      setCount,
-      count,
-      currentPage,
-      setCurrentPage
-    }}>
       <div className="container">
         <div className="content__top">
           <Categories />
@@ -62,7 +47,7 @@ export const Home = () => {
           {
             isLoading ? [...new Array(4)].map( (_, i) => <Skeleton key={i}/> ) :
               (item
-                  .filter(e => e.title.toLowerCase().includes(searchValue.toLowerCase()))
+                  .filter(e => e.title.toLowerCase().includes(filterPizza.toLowerCase()))
                   .map(e => ( 
                   <Card key={e.id} {...e}/>
               )))
@@ -70,6 +55,5 @@ export const Home = () => {
         </div>
         <Pagination />
       </div>
-    </Provider>
   )
 }

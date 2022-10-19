@@ -1,25 +1,22 @@
-import ReactPaginate from 'react-paginate'
-import { useContext } from 'react'
-import { sortContext } from '../../pages/Home' 
+import ReactPaginate from 'react-paginate' 
+import { useDispatch } from 'react-redux'
+
+import { changePage } from '../../redux/slices/pizzaSlice'
 import styles from './Pagination.module.scss'
 
 export const Pagination = () => {
-  const {setCurrentPage} = useContext(sortContext)
-  
-  const selectedPage = (i) => {
-    setCurrentPage(i+1)
-  }
+  const dispatch = useDispatch()
 
   return (
     <ReactPaginate
-          className={styles.root}
-          breakLabel="..."
-          nextLabel=">"
-          previousLabel="<"
-          onPageChange={i => selectedPage(i.selected)}
-          pageRangeDisplayed={4}
-          pageCount={3}
-          renderOnZeroPageCount={null}
-        />
+      className={styles.root}
+      breakLabel="..."
+      nextLabel=">"
+      previousLabel="<"
+      onPageChange={i => dispatch(changePage(i.selected+1))}
+      pageRangeDisplayed={4}
+      pageCount={3}
+      renderOnZeroPageCount={null}
+    />
   )
 }
