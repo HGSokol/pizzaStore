@@ -1,23 +1,22 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { sortPizza } from '../redux/slices/pizzaSlice'
+import { sortPizza } from '../redux/slices/filterSlice'
+
+const objSort = [
+  {name:'популярности (Возрастанию)', sortCategories:'rating'},
+  {name:'популярности (Убыванию)', sortCategories:'-rating'},
+  {name:'цене (Возрастанию)', sortCategories:'price'},
+  {name:'цене (Убыванию)', sortCategories:'-price'},
+  {name:'алфавиту (Возрастанию)', sortCategories:'title'},
+  {name:'алфавиту (Убыванию)', sortCategories:'-title'},
+]
 
 export const Sort = () => {
-    const sort = useSelector(state => state.pizza.sort)
+    const sort = useSelector(state => state.filterReducer.sort)
     const dispatch = useDispatch()
 
-    const objSort = [
-      {name:'популярности (Возрастанию)', sortCategories:'rating'},
-      {name:'популярности (Убыванию)', sortCategories:'-rating'},
-      {name:'цене (Возрастанию)', sortCategories:'price'},
-      {name:'цене (Убыванию)', sortCategories:'-price'},
-      {name:'алфавиту (Возрастанию)', sortCategories:'title'},
-      {name:'алфавиту (Убыванию)', sortCategories:'-title'},
-    ]
-
     const [openPopup, setOpenPopup] = useState(false)
-
 
     const isSort = (i) => {
       dispatch(sortPizza(i))
