@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 export const Card = (props) => {
-  const {price, sizes, imageUrl, title, types} = props
+  const { price, sizes, imageUrl, title, types } = props
 
   const [active, setActive] = useState(0)
   const [activeSize, setActiveSize] = useState(0)

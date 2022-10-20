@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 import { Categories } from '../components/Categories'
 import { Sort } from '../components/Sort'
@@ -9,7 +10,7 @@ import { Pagination } from '../components/Pagination';
 
 
 export const Home = () => {
-  const { value, categoryId, sort, currentPage} = useSelector(state => state.filterReducer)
+  const { value, categoryId, sort, currentPage } = useSelector(state => state.filterReducer)
 
   const [item, setItem] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -20,18 +21,20 @@ export const Home = () => {
     const sortBy = sort.sortCategories.replace('-','');
     const categoryRequest = categoryId === 0? '': `&category=${categoryId}`
     const order = sort.sortCategories.includes('-') ? 'asc' : 'desc'
+    const search = value ? `&search=${value}` : ''
 
-    fetch(
-      `https://634846130484786c6e965029.mockapi.io/items?page=${currentPage}&limit=4&sortBy=${sortBy}${categoryRequest}&order=${order}`
-    )
-      .then(res => res.json())
+    axios
+      .get(`https://634846130484786c6e965029.mockapi.io/items?page=${currentPage+1}&limit=4&sortBy=${sortBy}${categoryRequest}&order=${order}&${search}`)
       .then(res => {
-        setItem(res)
+        setItem(res.data)
         setIsLoading(false)
       })
-
+      .catch(e => {
+        alert("Ошибка получения пицц", e.message)
+      }) 
+      
     window.scrollTo(0, 0)
-  }, [sort, categoryId, currentPage])
+  }, [value, sort, categoryId, currentPage])
 
   return(
       <div className="container">
@@ -44,7 +47,6 @@ export const Home = () => {
           {
             isLoading ? [...new Array(4)].map( (_, i) => <Skeleton key={i}/> ) :
               (item
-                  .filter(e => e.title.toLowerCase().includes(value.toLowerCase()))
                   .map(e => ( 
                   <Card key={e.id} {...e}/>
               )))

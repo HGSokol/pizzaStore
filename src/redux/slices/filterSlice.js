@@ -7,7 +7,7 @@ const initialState = {
       name:'популярности (Возрастанию)',
       sortCategories:'rating',
   },
-  currentPage: 1,
+  currentPage: 0,
 }
 
 export const filterSlice = createSlice({
