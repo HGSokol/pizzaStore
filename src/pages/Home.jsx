@@ -18,7 +18,6 @@ export const Home = () => {
   const isSearch = useRef(false)
 
   const { value, categoryId, sort, currentPage } = useSelector(state => state.filterReducer)
-  // const sort = useSelector(state => state.filterReducer.sort)
 
   const [item, setItem] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -45,7 +44,6 @@ export const Home = () => {
     
   useEffect(() => {     
     if(window.location.search){
-      console.log(window.location.search)
       const params = qs.parse(window.location.search.substring(1));
       const sort = objSort.find(obj => obj.sortCategories === params.sort)
         
@@ -74,7 +72,7 @@ export const Home = () => {
     }
     isSearch.current = true
   }, [value, sort.sortCategories, categoryId, currentPage])
-
+  
   return(
     <div className="container">
       <div className="content__top">
@@ -95,5 +93,3 @@ export const Home = () => {
     </div>
   )
 }
-
-// /?sort=rating&categoryId=4&currentPage=3

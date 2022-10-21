@@ -36,5 +36,5 @@ export const filterSlice = createSlice({
 
 const {actions, reducer} = filterSlice
 
-export default reducer
 export const {inputSort, changeCategory, sortPizza, changePage, setFilters} = actions
+export default reducer
