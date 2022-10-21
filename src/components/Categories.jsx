@@ -5,9 +5,9 @@ import { changeCategory } from '../redux/slices/filterSlice'
 const categories = ['Все','Мясные','Вегетарианские','Гриль','Острые','Закрытые']
 
 export const Categories = () => {
-  const { categoryId } = useSelector(state => state.filterReducer)
+  const categoryId = useSelector(state => state.filterReducer.categoryId)
   const dispatch = useDispatch()
-  
+
   return(
     <div className="categories">
       <ul>

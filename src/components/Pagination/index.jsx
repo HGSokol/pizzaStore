@@ -5,7 +5,7 @@ import { changePage } from '../../redux/slices/filterSlice'
 import styles from './Pagination.module.scss'
 
 export const Pagination = () => {
-  const { currentPage } = useSelector(state => state.filterReducer)
+  const currentPage = useSelector(state => state.filterReducer.currentPage)
   const dispatch = useDispatch()
 
   return (
@@ -14,10 +14,10 @@ export const Pagination = () => {
       breakLabel="..."
       nextLabel=">"
       previousLabel="<"
-      onPageChange={i => dispatch(changePage(i.selected))}
+      onPageChange={i => dispatch(changePage(i.selected+1))}
       pageRangeDisplayed={4}
       pageCount={3}
-      forcePage={currentPage}
+      forcePage={currentPage-1}
       renderOnZeroPageCount={null}
     />
   )

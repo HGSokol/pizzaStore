@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { sortPizza } from '../redux/slices/filterSlice'
 
-const objSort = [
+export const objSort = [
   {name:'популярности (Возрастанию)', sortCategories:'rating'},
   {name:'популярности (Убыванию)', sortCategories:'-rating'},
   {name:'цене (Возрастанию)', sortCategories:'price'},

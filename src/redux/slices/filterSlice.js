@@ -7,7 +7,7 @@ const initialState = {
       name:'популярности (Возрастанию)',
       sortCategories:'rating',
   },
-  currentPage: 0,
+  currentPage: 1,
 }
 
 export const filterSlice = createSlice({
@@ -26,10 +26,15 @@ export const filterSlice = createSlice({
     changePage: (state,action) => {
       state.currentPage = action.payload
     },
+    setFilters: (state, action) => {
+      state.sort = action.payload.sort
+      state.categoryId = Number(action.payload.categoryId)
+      state.currentPage = Number(action.payload.currentPage)
+    }
   },
 })
 
 const {actions, reducer} = filterSlice
 
 export default reducer
-export const {inputSort, changeCategory, sortPizza, changePage} = actions
+export const {inputSort, changeCategory, sortPizza, changePage, setFilters} = actions

@@ -21,13 +21,13 @@ export const Search = () => {
   const onChangeInput = (e) => {
     setInputValue(e.target.value);
     updateSearchValue(e.target.value);
-    dispatch(changePage(0))
+    dispatch(changePage(1))
   }
     
   const onClearInput = (str) => {
     setInputValue(str);
     updateSearchValue(str);
-    dispatch(changePage(0))
+    dispatch(changePage(1))
     inputRef.current.focus();
   }
 
