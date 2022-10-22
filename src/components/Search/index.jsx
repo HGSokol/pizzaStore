@@ -1,6 +1,5 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { useRef } from 'react'
 import debounce from 'lodash.debounce'
 
 import { inputSort, changePage } from '../../redux/slices/filterSlice'
