@@ -34,6 +34,8 @@ export const filterSlice = createSlice({
   },
 })
 
+export const selectFilter = state => state.filterReducer
+
 const {actions, reducer} = filterSlice
 
 export const {inputSort, changeCategory, sortPizza, changePage, setFilters} = actions

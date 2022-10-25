@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { addItem } from '../../redux/slices/cartSlice'
+import { addItem, selectCart } from '../../redux/slices/cartSlice'
 
 export const Card = (props) => {
   const { id, price, sizes, imageUrl, title, types } = props
   const dispatch = useDispatch()
-  const items = useSelector(state => state.cartReducer.items)
+  const { items } = useSelector(selectCart)
   const addedCount = items.find(e => e.id === id) 
   
   const [activeType, setActiveType] = useState(0)

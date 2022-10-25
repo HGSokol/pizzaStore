@@ -18,6 +18,11 @@
       color: $orange;
       border-bottom: 1px dashed $orange;
       cursor: pointer;
+
+      &:hover{
+        color: gray;
+        border-bottom: 1px solid gray;
+      }
     }
   }
 

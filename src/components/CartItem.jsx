@@ -6,9 +6,7 @@ export const CartItem = ({title, id, type, sizes, count, price, imageUrl}) => {
   const dispatch = useDispatch()
 
   const onClickAddCountItem = () => {
-    dispatch(addItem({
-      id
-    }))
+    dispatch(addItem({ id }))
   }
   const onClickRemoveCountItem = () => {
     if(count>0){

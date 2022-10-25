@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { sortPizza } from '../redux/slices/filterSlice'
+import { sortPizza, selectFilter } from '../redux/slices/filterSlice'
 
 export const objSort = [
   {name:'популярности (Возрастанию)', sortCategories:'rating'},
@@ -13,7 +13,7 @@ export const objSort = [
 ]
 
 export const Sort = () => {
-  const sort = useSelector(state => state.filterReducer.sort)
+  const { sort } = useSelector(selectFilter)
   const dispatch = useDispatch()
   const [openPopup, setOpenPopup] = useState(false)
   const sortRef = useRef()

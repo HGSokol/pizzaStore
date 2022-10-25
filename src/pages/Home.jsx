@@ -9,18 +9,20 @@ import { Card } from '../components/Card';
 import { Skeleton } from '../components/Card/Skeleon';
 import { Pagination } from '../components/Pagination';
 import { objSort } from '../components/Sort'
-import { setFilters } from '../redux/slices/filterSlice' 
-import { fetchPizzasItems } from '../redux/slices/pizzasSlice'
+import { setFilters, selectFilter } from '../redux/slices/filterSlice' 
+import { fetchPizzasItems, selectPizzas } from '../redux/slices/pizzasSlice'
 
 export const Home = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isSearch = useRef(false)
 
-  const { value, categoryId, sort, currentPage } = useSelector(state => state.filterReducer)
-  const { items, isLoading } = useSelector(state => state.pizzasReducer)
+  const { value, categoryId, sort, currentPage } = useSelector(selectFilter)
+  const { items, isLoading } = useSelector(selectPizzas)
 
-  const fetchPizzas = async () => {
+
+  console.log(items, isLoading)
+  const fetchPizzas = () => {
     const sortBy = sort.sortCategories.replace('-','');
     const categoryRequest = categoryId === 0? '': `&category=${categoryId}`
     const order = sort.sortCategories.includes('-') ? 'asc' : 'desc'
@@ -30,9 +32,9 @@ export const Home = () => {
       fetchPizzasItems({
         sortBy, 
         categoryRequest,
-          order, 
-          search, 
-          currentPage
+        order, 
+        search, 
+        currentPage
       })
     )
 
@@ -65,11 +67,14 @@ export const Home = () => {
     }
     
     if (!window.location.search) {
+      console.log(1)
       fetchPizzas();
     }
     isSearch.current = true
-  }, [value, sort.sortCategories, categoryId, currentPage])
+  }, [value, sort, categoryId, currentPage])
   
+
+  console.log(items)
   return(
     <div className="container">
       <div className="content__top">
