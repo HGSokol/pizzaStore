@@ -387,3 +387,16 @@ body {
     }
   }
 }
+.singlePizza{
+  display: flex;
+  flex-direction: row;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  button {
+    margin-top: 50px;
+  }
+
+}

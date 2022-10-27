@@ -16,12 +16,10 @@ export const Home = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isSearch = useRef(false)
-
+  
   const { value, categoryId, sort, currentPage } = useSelector(selectFilter)
   const { items, isLoading } = useSelector(selectPizzas)
 
-
-  console.log(items, isLoading)
   const fetchPizzas = () => {
     const sortBy = sort.sortCategories.replace('-','');
     const categoryRequest = categoryId === 0? '': `&category=${categoryId}`
@@ -67,14 +65,11 @@ export const Home = () => {
     }
     
     if (!window.location.search) {
-      console.log(1)
       fetchPizzas();
     }
     isSearch.current = true
   }, [value, sort, categoryId, currentPage])
   
-
-  console.log(items)
   return(
     <div className="container">
       <div className="content__top">
@@ -89,12 +84,12 @@ export const Home = () => {
           <p>К сожалению, не удалось получить пиццы. Попробуйте повторить попытку позже.</p>
         </div>
         ) : (
-        <div className="content__items">
+        <div className="content__items" >
           {
             isLoading === 'loading' ? [...new Array(4)].map( (_, i) => <Skeleton key={i}/> ) :
               (items
                   .map(e => ( 
-                  <Card key={e.id} {...e}/>
+                  <Card key={e.id} {...e} />
               )))
           } 
         </div>
