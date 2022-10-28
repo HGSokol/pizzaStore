@@ -9,10 +9,10 @@
     display:flex;
     justify-content: center;
     flex-direction: column;
-    animation: translateY duration 1s delay;
+    transition: all .15s ease-in-out;
 
     &:hover{
-      transform: translateY(-20px);
+      scale: 1.1;
       -webkit-box-shadow: 0px 0px 27px 0px rgba(255, 247, 0, 0.2);
       -moz-box-shadow: 0px 0px 27px 0px rgba(255, 247, 0, 0.2);
       box-shadow: 0px 0px 27px 0px rgba(255, 247, 0, 0.2);
