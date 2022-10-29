@@ -14,9 +14,7 @@ export const CartItem = ({title, id, type, sizes, count, price, imageUrl}) => {
     }
   }
   const onClickDeleteItem = () => {
-    if(window.confirm('Вы действительно хотите удалить элемент?')){
-      dispatch(removeItem(id))
-    }
+    dispatch(removeItem(id))
   }
 
   const toggleColor = count < 1 ? {color: '#C0C0C0'}: {}
