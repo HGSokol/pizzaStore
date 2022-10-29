@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import qs from 'qs'
@@ -11,6 +11,7 @@ import { Pagination } from '../components/Pagination';
 import { objSort } from '../components/Sort'
 import { setFilters, selectFilter } from '../redux/slices/filterSlice' 
 import { fetchPizzasItems, selectPizzas } from '../redux/slices/pizzasSlice'
+import { CartItems } from '../@types/type'
 
 export const Home = () => {
   const navigate = useNavigate()
@@ -18,7 +19,7 @@ export const Home = () => {
   const isSearch = useRef(false)
   
   const { value, categoryId, sort, currentPage } = useSelector(selectFilter)
-  const { items, isLoading } = useSelector(selectPizzas)
+  const { items, isLoading }: {items: CartItems[], isLoading: 'loading' | 'success' | 'error'} = useSelector(selectPizzas)
 
   const fetchPizzas = () => {
     const sortBy = sort.sortCategories.replace('-','');
@@ -27,6 +28,7 @@ export const Home = () => {
     const search = value ? `&search=${value}` : ''
 
     dispatch(
+      //@ts-ignore
       fetchPizzasItems({
         sortBy, 
         categoryRequest,
@@ -86,11 +88,9 @@ export const Home = () => {
         ) : (
         <div className="content__items" >
           {
-            isLoading === 'loading' ? [...new Array(4)].map( (_, i) => <Skeleton key={i}/> ) :
-              (items
-                  .map(e => ( 
-                  <Card key={e.id} {...e} />
-              )))
+            isLoading === 'loading' ? 
+              [...new Array(4)].map( (_, i) => <Skeleton key={i}/> ) :
+              (items.map(e => (<Card key={e.id} {...e} />)))
           } 
         </div>
         )

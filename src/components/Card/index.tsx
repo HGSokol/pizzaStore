@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { addItem, selectCart } from '../../redux/slices/cartSlice'
+import { CartItems } from '../../@types/type'
 
-export const Card = (props) => {
+export const Card = (props: CartItems) => {
   const dispatch = useDispatch()
   const { id, price, sizes, imageUrl, title, types } = props
-  const { items } = useSelector(selectCart)
+  const { items }: {items: CartItems[]} = useSelector(selectCart)
   const addedCount = items.find(e => e.id === id) 
   
   const [activeType, setActiveType] = useState(0)

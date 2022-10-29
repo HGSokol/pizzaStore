@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react'
+import React, { useCallback, useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import debounce from 'lodash.debounce'
 
@@ -8,26 +8,27 @@ import styles from './Search.module.scss'
 export const Search = () => {
   const[inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const updateSearchValue = useCallback(
     debounce((str) => {
-      dispatch(inputSort(str))
+      dispatch(inputSort(str)) 
     }, 300),
     []
   )
     
-  const onChangeInput = (e) => {
-    setInputValue(e.target.value);
-    updateSearchValue(e.target.value);
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+    updateSearchValue(event.target.value);
     dispatch(changePage(1))
   }
     
-  const onClearInput = (str) => {
+  const onClearInput = (str: string) => {
     setInputValue(str);
     updateSearchValue(str);
     dispatch(changePage(1))
-    inputRef.current.focus();
+    inputRef.current?.focus();
+
   }
 
   return (
@@ -41,7 +42,7 @@ export const Search = () => {
         placeholder='Поиск пиццы...'
         ref={inputRef}
         value={inputValue}
-        onChange={(e) => onChangeInput(e)}/>
+        onChange={(event) => onChangeInput(event)}/>
         {inputValue.length>0 && (
           <div 
             className={styles.cross}

@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactPaginate from 'react-paginate' 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -18,7 +19,6 @@ export const Pagination = () => {
       pageRangeDisplayed={4}
       pageCount={3}
       forcePage={currentPage-1}
-      renderOnZeroPageCount={null}
     />
   )
 }

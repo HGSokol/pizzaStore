@@ -1,3 +1,4 @@
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { changeCategory } from '../redux/slices/filterSlice'
@@ -13,13 +14,13 @@ export const Categories = () => {
     <div className="categories">
       <ul>
         {
-          categories.map((e,i) => (
+          categories.map((item,i) => (
             <li
               key={i}
               className={categoryId === i ? 'active' : ''}
               onClick={() => dispatch(changeCategory(i))}
             >
-              {e}
+              {item}
             </li>
           ))
         }

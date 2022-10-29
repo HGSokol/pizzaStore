@@ -1,9 +1,14 @@
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { sortPizza, selectFilter } from '../redux/slices/filterSlice'
 
-export const objSort = [
+type SortItem = {
+  name: string;
+  sortCategories: string;
+}
+
+export const objSort: SortItem[] = [
   {name:'популярности (Возрастанию)', sortCategories:'rating'},
   {name:'популярности (Убыванию)', sortCategories:'-rating'},
   {name:'цене (Возрастанию)', sortCategories:'price'},
@@ -16,15 +21,15 @@ export const Sort = () => {
   const { sort } = useSelector(selectFilter)
   const dispatch = useDispatch()
   const [openPopup, setOpenPopup] = useState(false)
-  const sortRef = useRef()
+  const sortRef = useRef<HTMLDivElement | null>(null)
 
-  const isSort = (i) => {
+  const isSort = (i: SortItem) => {
     dispatch(sortPizza(i))
     setOpenPopup(false)
   }
 
   useEffect(() => { 
-    const handleClickOutside = (e) => {
+    const handleClickOutside = (e: any) => {
       if(!e.path.includes(sortRef.current)){
         setOpenPopup(false)
       }
@@ -62,13 +67,13 @@ export const Sort = () => {
               className="sort__popup">
               <ul>
                 {
-                  objSort.map((e,i) => (
+                  objSort.map((item,i) => (
                     <li 
                       key={i}
-                      className={sort.sortCategories === e.sortCategories ? 'active' : '' }
-                      onClick={() => isSort(e)}
+                      className={sort.sortCategories === item.sortCategories ? 'active' : '' }
+                      onClick={() => isSort(item)}
                     >
-                      {e.name}
+                      {item.name}
                     </li>
                   ))
                 }

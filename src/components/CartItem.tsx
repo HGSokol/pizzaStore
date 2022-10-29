@@ -1,8 +1,10 @@
+import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import { removeItem, addItem, minusItems } from "../redux/slices/cartSlice"
+import { CartItems } from '../@types/type';
 
-export const CartItem = ({title, id, type, sizes, count, price, imageUrl}) => {
+export const CartItem = ({title, id, type, sizes, count, price, imageUrl}: CartItems) => {
   const dispatch = useDispatch()
 
   const onClickAddCountItem = () => {

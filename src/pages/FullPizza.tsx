@@ -2,17 +2,7 @@ import React from "react"
 import axios from "axios"
 import { useParams, Link, useNavigate } from "react-router-dom"
 
-interface ItemPizza{
-  category: number,
-  id: string,
-  imageUrl: string,
-  ingredients: string,
-  price: number,
-  rating: number,
-  sizes: number[],
-  title: string,
-  types: number[]
-}
+import { ItemPizza } from "../@types/type"
 
 export const FullPizza = () => {
   const [itemPizza, setItemPizza] = React.useState<ItemPizza | null>(null)

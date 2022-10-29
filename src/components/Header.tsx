@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -9,7 +10,7 @@ export const Header = () => {
   const { items, totalPrice } = useSelector(selectCart)
   const { pathname } = useLocation()
 
-  const countPizzas = items.reduce((e,i) => e + i.count ,0)
+  const countPizzas = items.reduce((e: number, i: any): number => e + i.count ,0)
   return(
     <div className="header">
       <div className="container">

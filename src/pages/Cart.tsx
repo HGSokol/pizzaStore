@@ -1,21 +1,23 @@
+import React from "react"
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 
 import { clearCart, selectCart } from "../redux/slices/cartSlice"
 import { CartItem } from "../components/CartItem"
 import { CartEmpty } from "../components/CartEmpty"
+import { CartItems } from "../@types/type"
 
 export const Cart = () => {
   const dispatch = useDispatch()
-  const { items, totalPrice } = useSelector(selectCart)
-
+  const { items, totalPrice }: {items: CartItems[], totalPrice: number } = useSelector(selectCart)
+  
   const onClickClearCart = () => {
     if(window.confirm('Вы действительно хотите очистить корзину?')){
       dispatch(clearCart())
     }
   }
 
-  const countPizzas = items.reduce((e,i) => e + i.count ,0)
+  const countPizzas = items.reduce((e: number,i: any) => e + i.count ,0)
   return (
     <div className="container container--cart">
       {
@@ -45,7 +47,7 @@ export const Cart = () => {
             {
               items.map(item => (
                 <CartItem key={item.id} {...item}/>
-                ))
+              ))
             }
             <div className="cart__bottom">
               <div className="cart__bottom-details">

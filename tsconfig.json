@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/@types"],
-  "exclude": ["node_modules", "build"] // *** The files to not type check ***
+  "include": ["src", "src/@types", "src/@types"],
+  "exclude": ["node_modules", "build"]
 }
