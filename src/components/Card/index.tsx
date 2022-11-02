@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { addItem, selectCart } from '../../redux/slices/cartSlice'
-import { CartItems } from '../../@types/type'
+import { CartItem } from '../../redux/slices/cartSlice'
+import { Pizza } from '../../redux/slices/pizzasSlice'
+import { useAppDispatch } from '../../redux/store'
 
-export const Card = (props: CartItems) => {
-  const dispatch = useDispatch()
+export const Card = (props: Pizza) => {
+  const dispatch = useAppDispatch()
   const { id, price, sizes, imageUrl, title, types } = props
-  const { items }: {items: CartItems[]} = useSelector(selectCart)
+  const { items } = useSelector(selectCart)
   const addedCount = items.find(e => e.id === id) 
   
   const [activeType, setActiveType] = useState(0)
@@ -17,13 +19,14 @@ export const Card = (props: CartItems) => {
   const arr = ['Традиционное', 'Тонкое'].filter((_,i) => types.includes(i))
   
   const onClickAdd = () => {
-    const itemObj = {
+    const itemObj: CartItem = {
       id,
       price, 
       title, 
-      type: arr[activeType],
-      sizes: sizes[activeSize], 
+      types: arr[activeType],
+      sizes: String(sizes[activeSize]), 
       imageUrl, 
+      count: 0,
     }
     
     dispatch(addItem(itemObj))
@@ -36,13 +39,13 @@ export const Card = (props: CartItems) => {
         className='pizza-block'>
         <div className="pizza-block-wrapper" >
           <Link to={`/pizza/${id}`}>
-          <img
-            className="pizza-block__image"
-            src={imageUrl}
-            alt="Pizza"
+            <img
+              className="pizza-block__image"
+              src={imageUrl}
+              alt="Pizza"
             />
+            <h4 className="pizza-block__title">{title}</h4>
           </Link>
-          <h4 className="pizza-block__title">{title}</h4>
           <div className="pizza-block__selector">
             <ul>
               {

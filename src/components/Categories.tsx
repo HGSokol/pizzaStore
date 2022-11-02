@@ -1,14 +1,15 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { changeCategory } from '../redux/slices/filterSlice'
 import { selectFilter } from '../redux/slices/filterSlice'
+import { useAppDispatch } from '../redux/store'
 
 const categories = ['Все','Мясные','Вегетарианские','Гриль','Острые','Закрытые']
 
 export const Categories = () => {
   const { categoryId } = useSelector(selectFilter)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   return(
     <div className="categories">

@@ -1,34 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import { sortPizza, selectFilter } from '../redux/slices/filterSlice'
-
-type SortItem = {
-  name: string;
-  sortCategories: string;
-}
+import { sortPizza, selectFilter, SortArr, SortPropertyEnum } from '../redux/slices/filterSlice'
+import { useAppDispatch } from '../redux/store'
 
 type PopupClick = MouseEvent & {
   path: Node[]
 }
 
-export const objSort: SortItem[] = [
-  {name:'популярности (Возрастанию)', sortCategories:'rating'},
-  {name:'популярности (Убыванию)', sortCategories:'-rating'},
-  {name:'цене (Возрастанию)', sortCategories:'price'},
-  {name:'цене (Убыванию)', sortCategories:'-price'},
-  {name:'алфавиту (Возрастанию)', sortCategories:'title'},
-  {name:'алфавиту (Убыванию)', sortCategories:'-title'},
+export const objSort: SortArr[] = [
+  {name:'популярности (Возрастанию)', sortCategories: SortPropertyEnum.RATING_DESC},
+  {name:'популярности (Убыванию)', sortCategories: SortPropertyEnum.RATING_ASC},
+  {name:'цене (Возрастанию)', sortCategories: SortPropertyEnum.PRICE_DESC},
+  {name:'цене (Убыванию)', sortCategories: SortPropertyEnum.PRICE_ASC},
+  {name:'алфавиту (Возрастанию)', sortCategories: SortPropertyEnum.TITLE_DESC},
+  {name:'алфавиту (Убыванию)', sortCategories: SortPropertyEnum.TITLE_ASC},
 ]
 
 export const Sort = () => {
   const { sort } = useSelector(selectFilter)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [openPopup, setOpenPopup] = useState(false)
   const sortRef = useRef<HTMLDivElement | null>(null)
 
-  const isSort = (i: SortItem) => {
-    dispatch(sortPizza(i))
+  const isSort = (item: SortArr) => {
+    dispatch(sortPizza(item))
     setOpenPopup(false)
   }
 

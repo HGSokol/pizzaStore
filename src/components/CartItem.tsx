@@ -1,14 +1,18 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 
 import { removeItem, addItem, minusItems } from "../redux/slices/cartSlice"
-import { CartItems } from '../@types/type';
+import { CartItem } from '../redux/slices/cartSlice';
+import { useAppDispatch } from '../redux/store';
 
-export const CartItem = ({title, id, type, sizes, count, price, imageUrl}: CartItems) => {
-  const dispatch = useDispatch()
+export const CartItemBlock = ({title, id, types, sizes, count, price, imageUrl}: CartItem) => {
+  const dispatch = useAppDispatch()
 
   const onClickAddCountItem = () => {
-    dispatch(addItem({ id }))
+    dispatch(
+      addItem({ 
+        id,
+      } as CartItem)
+    )
   }
   const onClickRemoveCountItem = () => {
     if(count>0){
@@ -33,7 +37,7 @@ export const CartItem = ({title, id, type, sizes, count, price, imageUrl}: CartI
         <div className="cart__item-info">
           <h3 style={toggleColor}>{title}</h3>
           <p
-            style={toggleColor}>{`${type}, ${sizes} см.`}</p>
+            style={toggleColor}>{`${types}, ${sizes} см.`}</p>
         </div>
         <div className="cart__item-count">
           <div 
