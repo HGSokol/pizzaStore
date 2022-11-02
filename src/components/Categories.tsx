@@ -18,8 +18,7 @@ export const Categories = () => {
             <li
               key={i}
               className={categoryId === i ? 'active' : ''}
-              onClick={() => dispatch(changeCategory(i))}
-            >
+              onClick={() => dispatch(changeCategory(i))}>
               {item}
             </li>
           ))

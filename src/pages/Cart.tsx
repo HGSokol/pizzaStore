@@ -17,7 +17,7 @@ export const Cart = () => {
     }
   }
 
-  const countPizzas = items.reduce((e: number,i: any) => e + i.count ,0)
+  const countPizzas = items.reduce((e: number, i: CartItems) => e + i.count ,0)
   return (
     <div className="container container--cart">
       {

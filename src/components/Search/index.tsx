@@ -28,7 +28,6 @@ export const Search = () => {
     updateSearchValue(str);
     dispatch(changePage(1))
     inputRef.current?.focus();
-
   }
 
   return (
