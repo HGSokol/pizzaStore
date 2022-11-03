@@ -1,16 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
 import { changeCategory } from '../redux/slices/filterSlice'
-import { selectFilter } from '../redux/slices/filterSlice'
 import { useAppDispatch } from '../redux/store'
 
 const categories = ['Все','Мясные','Вегетарианские','Гриль','Острые','Закрытые']
 
-export const Categories = () => {
-  const { categoryId } = useSelector(selectFilter)
+export const Categories = React.memo(({categoryId}:{categoryId:number}) => {
   const dispatch = useAppDispatch()
-
+  
   return(
     <div className="categories">
       <ul>
@@ -27,4 +24,4 @@ export const Categories = () => {
       </ul>
     </div>
   )
-}
+})

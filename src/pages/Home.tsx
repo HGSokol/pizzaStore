@@ -13,7 +13,7 @@ import { setFilters, selectFilter } from '../redux/slices/filterSlice'
 import { fetchPizzasItems, SearchPizzaParams, selectPizzas } from '../redux/slices/pizzasSlice'
 import { useAppDispatch } from '../redux/store'
 
-export const Home = () => {
+export const Home =() => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const isSearch = useRef(false)
@@ -80,8 +80,8 @@ export const Home = () => {
   return(
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories categoryId={categoryId}/>
+        <Sort sort={sort}/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {
