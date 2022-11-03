@@ -1,16 +1,27 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { Search } from './Search'
-import { selectCart } from '../redux/slices/cartSlice'
+import { selectCart } from '../redux/slices/cart/selectors'
 import logo from '../assets/img/pizza-logo.svg'
 
 export const Header = () => {
   const { items, totalPrice } = useSelector(selectCart)
   const { pathname } = useLocation()
+  const isMounted = useRef(false)
 
   const countPizzas = items.reduce((e,i) => e + i.count ,0)
+
+  useEffect(() => {
+    if(isMounted.current){
+      const json = JSON.stringify(items)
+      localStorage.setItem('items', json)      
+    }
+    
+    isMounted.current = true
+  }, [items])
+
   return(
     <div className="header">
       <div className="container">

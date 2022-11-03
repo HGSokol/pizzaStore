@@ -1,15 +1,15 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { useParams, Link, useNavigate } from "react-router-dom"
 
-import { ItemPizza } from "../@types/type"
+import { Pizza } from "../redux/slices/pizza/types"
 
 export const FullPizza = () => {
-  const [itemPizza, setItemPizza] = React.useState<ItemPizza | null>(null)
+  const [itemPizza, setItemPizza] = useState<Pizza | null>(null)
   const { id } = useParams()
   const navigate = useNavigate()
 
-  React.useEffect(() => {
+  useEffect(() => {
     if(id){
       const fetch = async () => {
         try{

@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, memo } from 'react'
 
-import { sortPizza, SortArr, SortPropertyEnum } from '../redux/slices/filterSlice'
+import { SortArr, SortPropertyEnum } from '../redux/slices/filter/types'
+import { sortPizza } from '../redux/slices/filter/slice'
 import { useAppDispatch } from '../redux/store'
 
 type PopupClick = MouseEvent & {
@@ -16,7 +17,7 @@ export const objSort: SortArr[] = [
   {name:'алфавиту (Убыванию)', sortCategories: SortPropertyEnum.TITLE_ASC},
 ]
 
-export const Sort = React.memo(({sort}:{sort:SortArr}) => {
+export const Sort = memo(({sort}:{sort:SortArr}) => {
   const dispatch = useAppDispatch()
   const [openPopup, setOpenPopup] = useState(false)
   const sortRef = useRef<HTMLDivElement | null>(null)

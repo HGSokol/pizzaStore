@@ -2,10 +2,11 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from 'react-redux'
 
-import { clearCart, selectCart } from "../redux/slices/cartSlice"
+import { clearCart } from "../redux/slices/cart/slice"
+import { selectCart } from "../redux/slices/cart/selectors"
+import { CartItem } from "../redux/slices/cart/types"
 import { CartItemBlock } from "../components/CartItem"
 import { CartEmpty } from "../components/CartEmpty"
-import { CartItem} from "../redux/slices/cartSlice"
 import { useAppDispatch } from "../redux/store"
 
 export const toggleColor = (n:number) => {

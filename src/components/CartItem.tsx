@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { removeItem, addItem, minusItems } from "../redux/slices/cartSlice"
-import { CartItem } from '../redux/slices/cartSlice';
+import { removeItem, addItem, minusItems } from "../redux/slices/cart/slice"
+import { CartItem } from '../redux/slices/cart/types';
 import { useAppDispatch } from '../redux/store';
 import { toggleColor } from '../pages/Cart';
 

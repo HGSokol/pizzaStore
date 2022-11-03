@@ -3,15 +3,17 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import qs from 'qs'
 
+import { useAppDispatch } from '../redux/store'
+import { selectFilter } from '../redux/slices/filter/selectors' 
+import { selectPizzas } from '../redux/slices/pizza/selectors'
+import { fetchPizzasItems, /* SearchPizzaParams, */  } from '../redux/slices/pizza/slice'
 import { Categories } from '../components/Categories'
 import { Sort } from '../components/Sort'
 import { Card } from '../components/Card';
 import { Skeleton } from '../components/Card/Skeleon';
 import { Pagination } from '../components/Pagination';
 import { objSort } from '../components/Sort'
-import { setFilters, selectFilter } from '../redux/slices/filterSlice' 
-import { fetchPizzasItems, SearchPizzaParams, selectPizzas } from '../redux/slices/pizzasSlice'
-import { useAppDispatch } from '../redux/store'
+// import { setFilters, selectFilter } from '../redux/slices/filterSlice' 
 
 export const Home =() => {
   const navigate = useNavigate()
@@ -76,7 +78,6 @@ export const Home =() => {
   //   }
   //   isSearch.current = true
   // }, [value, sort, categoryId, currentPage])
-  
   return(
     <div className="container">
       <div className="content__top">

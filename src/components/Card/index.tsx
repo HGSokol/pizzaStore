@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { addItem, selectCart } from '../../redux/slices/cartSlice'
-import { CartItem } from '../../redux/slices/cartSlice'
-import { Pizza } from '../../redux/slices/pizzasSlice'
+import { selectCart } from '../../redux/slices/cart/selectors'
+import { addItem } from '../../redux/slices/cart/slice'
+import { CartItem } from '../../redux/slices/cart/types'
+import { Pizza } from '../../redux/slices/pizza/types'
 import { useAppDispatch } from '../../redux/store'
 
 export const Card = (props: Pizza) => {

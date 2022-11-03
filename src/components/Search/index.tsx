@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useRef } from 'react'
 import debounce from 'lodash.debounce'
 
-import { inputSort, changePage } from '../../redux/slices/filterSlice'
+import { inputSort, changePage } from '../../redux/slices/filter/slice'
 import styles from './Search.module.scss'
 import { useAppDispatch } from '../../redux/store'
 
