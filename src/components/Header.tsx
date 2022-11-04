@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, memo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
