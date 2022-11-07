@@ -4,7 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom"
 
 import { Pizza } from "../redux/slices/pizza/types"
 
-export const FullPizza = () => {
+const FullPizza = () => {
   const [itemPizza, setItemPizza] = useState<Pizza | null>(null)
   const { id } = useParams()
   const navigate = useNavigate()
@@ -53,3 +53,5 @@ export const FullPizza = () => {
     </div>
   )
 }
+
+export default FullPizza;

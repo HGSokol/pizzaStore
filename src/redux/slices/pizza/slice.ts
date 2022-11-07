@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
+
 import { Pizza, PizzaSliceState, SearchPizzaParams, Status } from "../pizza/types";
 
 export const fetchPizzasItems = createAsyncThunk<

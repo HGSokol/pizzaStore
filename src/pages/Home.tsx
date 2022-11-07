@@ -1,25 +1,20 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import qs from 'qs'
 
 import { useAppDispatch } from '../redux/store'
 import { selectFilter } from '../redux/slices/filter/selectors' 
 import { selectPizzas } from '../redux/slices/pizza/selectors'
-import { fetchPizzasItems, /* SearchPizzaParams, */  } from '../redux/slices/pizza/slice'
+import { fetchPizzasItems  } from '../redux/slices/pizza/slice'
+
 import { Categories } from '../components/Categories'
 import { Sort } from '../components/Sort'
 import { Card } from '../components/Card';
 import { Skeleton } from '../components/Card/Skeleon';
 import { Pagination } from '../components/Pagination';
-import { objSort } from '../components/Sort'
-// import { setFilters, selectFilter } from '../redux/slices/filterSlice' 
 
-export const Home =() => {
-  const navigate = useNavigate()
+const Home =() => {
   const dispatch = useAppDispatch()
-  const isSearch = useRef(false)
-  
+
   const { value, categoryId, sort, currentPage } = useSelector(selectFilter)
   const { items, isLoading } = useSelector(selectPizzas)
 
@@ -41,43 +36,11 @@ export const Home =() => {
 
     window.scrollTo(0, 0)
   }
-    
-  // useEffect(() => {     
-  //   if(window.location.search){
-  //     const params = qs.parse(window.location.search.substring(1)) /* as unknown */ as SearchPizzaParams
-  //     const sort = objSort.find(obj => obj.sortCategories === params.sortBy);
-      
-  //     dispatch(setFilters({
-  //       value: params.search,
-  //       categoryId: Number(params.categoryRequest),
-  //       sort: sort || objSort[0],
-  //       currentPage: Number(params.currentPage),
-  //     }));
-  //     isSearch.current = false;
-  //   }
-  // }, [])
 
   useEffect(() =>{
     fetchPizzas()
   }, [value, sort, categoryId, currentPage])
-  
-  // useEffect(() => {
-  //   if(isSearch.current){
-  //     const query = qs.stringify({
-  //       sort: sort.sortCategories,
-  //       categoryId,
-  //       currentPage,
-  //     })
-  //     navigate(`?${query}`)  
 
-  //     fetchPizzas()
-  //   }
-    
-  //   if (!window.location.search) {
-  //     fetchPizzas();
-  //   }
-  //   isSearch.current = true
-  // }, [value, sort, categoryId, currentPage])
   return(
     <div className="container">
       <div className="content__top">
@@ -105,3 +68,5 @@ export const Home =() => {
     </div>
   )
 }
+
+export default Home;

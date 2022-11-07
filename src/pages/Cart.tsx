@@ -13,7 +13,7 @@ export const toggleColor = (n:number) => {
   return n < 1 ? {color: '#C0C0C0'}: {}
 }
 
-export const Cart = () => {
+const Cart = () => {
   const dispatch = useAppDispatch()
   const { items, totalPrice } = useSelector(selectCart)
   
@@ -83,3 +83,5 @@ export const Cart = () => {
     </div>
   )
 }
+
+export default Cart;
